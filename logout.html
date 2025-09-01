@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elegant Men - Auth</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background video */
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      filter: brightness(0.6); /* dim video so auth box stands out */
+    }
+
+    .auth-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0px 6px 16px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 1;
+    }
+
+    h2 { margin-bottom: 20px; color: #222; }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 15px;
+      width: 100%;
+      border: none;
+      background: #2a9d8f;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background: #21867a; }
+    .switch-link { margin-top: 10px; font-size: 14px; cursor: pointer; color: #2a9d8f; }
+    .switch-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- Background video -->
+<video autoplay muted loop id="bg-video">
+  <source src="img/iop.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="auth-box">
+  <h2 id="authTitle">Login</h2>
+
+  <!-- Signup -->
+  <div id="signupForm" style="display:none;">
+    <input type="text" id="signupUser" placeholder="Choose Username">
+    <input type="email" id="signupEmail" placeholder="Enter Email">
+    <input type="password" id="signupPass" placeholder="Choose Password">
+    <button id="signupBtn">Sign Up</button>
+    <p class="switch-link" onclick="showLogin()">Already have an account? Login</p>
+  </div>
+
+  <!-- Login -->
+  <div id="loginForm">
+    <input type="email" id="loginEmail" placeholder="Enter Email">
+    <input type="password" id="loginPass" placeholder="Enter Password">
+    <button id="loginBtn">Login</button>
+    <p class="switch-link" onclick="showSignup()">Don’t have an account? Sign Up</p>
+    <p class="switch-link" onclick="showForgot()">Forgot Password?</p>
+  </div>
+
+  <!-- Forgot Password -->
+  <div id="forgotForm" style="display:none;">
+    <input type="email" id="forgotEmail" placeholder="Enter Your Registered Email">
+    <button id="forgotBtn">Reset Password</button>
+    <p class="switch-link" onclick="showLogin()">Back to Login</p>
+  </div>
+</div>
+
+<!-- Firebase Scripts -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    sendPasswordResetEmail, 
+    onAuthStateChanged, 
+    updateProfile
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    authDomain: "elegantmen-aefea.firebaseapp.com",
+    apiKey: "AIzaSyDq_EMpK8rAR4ec6I6p0M5_GWiLe2eiYfw",
+    projectId: "elegantmen-aefea",
+    storageBucket: "elegantmen-aefea.firebasestorage.app",
+    messagingSenderId: "566009823819",
+    appId: "1:566009823819:web:cbf3ae54893eb8a51403ce",
+    measurementId: "G-4XMJ6JXJ0V"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const SITE_URL = "index.html"; 
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) window.location.href = SITE_URL;
+  });
+
+  window.showSignup = function() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+    document.getElementById("forgotForm").style.display = "none";
+    document.getElementById("authTitle").innerText = "Sign Up";
+  }
+  window.showLogin = function() {
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("forgotForm").style.display = "none";
+    document.getElementById("authTitle").innerText = "Login";
+  }
+  window.showForgot = function() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("forgotForm").style.display = "block";
+    document.getElementById("authTitle").innerText = "Forgot Password";
+  }
+
+  async function signup() {
+    let user = document.getElementById("signupUser").value.trim();
+    let email = document.getElementById("signupEmail").value.trim();
+    let pass = document.getElementById("signupPass").value.trim();
+    if (!user || !email || !pass) { alert("All fields are required!"); return; }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+      await updateProfile(userCredential.user, { displayName: user });
+      alert("Signup successful ✅ Welcome " + user + "!");
+      window.location.href = SITE_URL;
+    } catch (error) { alert("Error: " + error.message); }
+  }
+
+  async function login() {
+    let email = document.getElementById("loginEmail").value.trim();
+    let pass = document.getElementById("loginPass").value.trim();
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      alert("Welcome back 🎉");
+      window.location.href = SITE_URL;
+    } catch (error) { alert("Login failed ❌ " + error.message); }
+  }
+
+  async function forgotPassword() {
+    let email = document.getElementById("forgotEmail").value.trim();
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset link sent to: " + email);
+    } catch (error) { alert("Error: " + error.message); }
+  }
+
+  document.getElementById("signupBtn").addEventListener("click", signup);
+  document.getElementById("loginBtn").addEventListener("click", login);
+  document.getElementById("forgotBtn").addEventListener("click", forgotPassword);
+</script>
+<nav id="nav-menu"> 
+        <a href="index.html">Home</a>
+
+</body>
+</html>

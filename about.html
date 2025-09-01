@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elegant Men Newsletter</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: white;
+        color: #333;
+    }
+    nav {
+        background-color: #1a1a1a;
+        color: #fff;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    nav .logo {
+        font-weight: 700;
+        font-size: 24px;
+    }
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+    nav ul li, nav ul a {
+        cursor: pointer;
+        transition: color 0.3s;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    nav ul li:hover, nav ul a:hover {
+        color: #ff9800;
+    }
+
+    /* ✅ Improved Hero Slider */
+    .hero {
+        position: relative;
+        height: 80vh;
+        max-height: 700px; /* prevent images from being too tall */
+        overflow: hidden;
+        border-radius: 12px; /* makes it look modern */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .slides {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        animation: slide 18s infinite;
+    }
+    .slides img {
+        flex: 0 0 100%;    /* each image takes full width */
+        height: 100%;
+        width: 100%;
+        object-fit: cover; /* ensures image crops nicely */
+        object-position: none;
+        transition: transform 1s ease-in-out;
+    }
+    .hero::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.25);
+        pointer-events: none;
+    }
+    @keyframes slide {
+        0% { transform: translateX(0%); }
+        30% { transform: translateX(0%); }
+        35% { transform: translateX(-100%); }
+        65% { transform: translateX(-100%); }
+        70% { transform: translateX(-200%); }
+        100% { transform: translateX(-200%); }
+    }
+    .hero-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .hero-text h1 {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    section {
+        padding: 60px 30px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    p {
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .subscribe-section {
+        background-color: #1a1a1a;
+        color: #fff;
+        padding: 50px 30px;
+        text-align: center;
+        border-radius: 10px;
+        margin: 40px 0;
+    }
+    .subscribe-section input[type="email"] {
+        padding: 10px;
+        width: 250px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .subscribe-section button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff9800;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    .subscribe-section button:hover {
+        background-color: #e68a00;
+    }
+
+    /* Testimonials */
+    .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .testimonial {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .testimonial p {
+        font-style: italic;
+    }
+    .testimonial h4 {
+        margin-top: 10px;
+        text-align: right;
+        color: #555;
+    }
+
+    /* FAQ */
+    .faq {
+        max-width: 800px;
+        margin: auto;
+    }
+    .faq-item {
+        margin-bottom: 15px;
+    }
+    .faq-item h4 {
+        cursor: pointer;
+        background: #ff9800;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 0;
+    }
+    .faq-item p {
+        display: none;
+        background: #fff;
+        padding: 10px;
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Elegant Men</div>
+    <ul>
+        <a href="index.html">Home</a>
+        <li onclick="scrollToSection('hero')">Hero</li>
+        <li onclick="scrollToSection('history')">History</li>
+        <li onclick="scrollToSection('features')">Features</li>
+        <li onclick="scrollToSection('vision')">Vision</li>
+        <li onclick="scrollToSection('mission')">Mission</li>
+        <li onclick="scrollToSection('testimonials')">Stories</li>
+        <li onclick="scrollToSection('faq')">FAQ</li>
+    </ul>
+</nav>
+
+<!-- Hero Slider -->
+<section class="hero" id="hero">
+    <div class="slides">
+        <img src="img/boots.png" alt="Men Fashion">
+        <img src="img/slider 2.png" alt="Women Fashion">
+        <img src="img/baseball.png" alt="Mixed Fashion">
+    </div>
+    <div class="hero-text">
+        <h1>Elegance in Every Stitch</h1>
+        <p>Deals On Luxury Wears of All Kinds And Quality Of Footwears.</p>
+    </div>
+</section>
+
+<!-- History Section -->
+<section id="history">
+    <h2>Our History</h2>
+    <p><b>Elegant Men started as online business in 2022, dedicated to providing sophisticated fashion for men and women worldwide. Over the years, we expanded into online retail and mobile apps, making style accessible to everyone.</b></p>
+    <p><b>From Footwears to contemporary casual wear, our collections represent decades of craftsmanship and attention to detail. Every garment tells a story of Elegance, Tradition, and Modernity.</b></p>
+    <p><b>What began as a local store has now become an international brand loved by thousands. Our journey is fueled by passion, culture, and the belief that fashion empowers identity.</b></p>
+</section>
+
+<!-- Features Section -->
+<section id="features">
+    <h2>App & Store Features</h2>
+    <ul>
+        <li><b>Browse and purchase premium fashion items easily.</b></li>
+        <li><b>Exclusive collections and early access to new releases.</b></li>
+        <li><b>Track your orders and get notifications on deals.</b></li>
+        <li><b>Wishlist your favorite products and receive curated suggestions.</b></li>
+        <li><b>Secure and fast payment integration.</b></li>
+        <li><b>Personalized style recommendations powered by AI.</b></li>
+        <li><b>Seamless shopping across web and mobile devices.</b></li>
+    </ul>
+</section>
+
+<!-- Vision Section -->
+<section id="vision">
+    <h2>Our Vision</h2>
+    <p><b>To redefine elegance by making premium fashion accessible to every man and woman, while setting new standards for quality and innovation.</b></p>
+</section>
+
+<!-- Mission Section -->
+<section id="mission">
+    <h2>Our Mission</h2>
+    <p><b>We aim to inspire confidence and identity through timeless designs, cutting-edge digital shopping experiences, and an unwavering commitment to excellence.</b></p>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials">
+    <h2>What People Say About Us</h2>
+    <div class="testimonials">
+        <div class="testimonial">
+            <p>"I found the perfect suit for my wedding through Elegant Men. The quality and service were unmatched."</p>
+            <h4>– Daniel Mathew</h4>
+        </div>
+        <div class="testimonial">
+            <p>"The app makes shopping so easy. I always know when my favorite items are back in stock!"</p>
+            <h4>– Samuel Arinze</h4>
+        </div>
+        <div class="testimonial">
+            <p>"Finally, a brand that balances tradition with modern fashion. I love both their men's and women's collections."</p>
+            <h4>– Chiamaka Okafor</h4>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+        <div class="faq-item">
+            <h4 onclick="toggleFaq(this)">How do I place an order?</h4>
+            <p>Simply download our app or visit our website, browse collections, add items to cart, and checkout securely.</p>
+        </div>
+        <div class="faq-item">
+            <h4 onclick="toggleFaq(this)">Do you offer worldwide shipping?</h4>
+            <p>Yes, Elegant Men ships worldwide with reliable delivery partners.</p>
+        </div>
+        <div class="faq-item">
+            <h4 onclick="toggleFaq(this)">Can I return or exchange an item?</h4>
+            <p>Absolutely! We offer a 14-day return and exchange policy for unused items with tags intact.</p>
+        </div>
+        <div class="faq-item">
+            <h4 onclick="toggleFaq(this)">Is my payment secure?</h4>
+            <p>Yes, we use encrypted payment gateways to ensure 100% security.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer style="background:#1a1a1a; color:#fff; padding:50px 30px 20px; font-family:'Poppins', sans-serif; margin-top:40px;">
+    <div style="max-width:1150px; margin:auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:30px; text-align:left;">
+        
+        <!-- Brand -->
+        <div>
+            <h2 style="color:#ff9800; margin-bottom:15px;">Elegant Men</h2>
+            <p style="font-size:14px; line-height:1.7; color:#ccc;">
+                Redefining style since 2022. We blend tradition and modern trends 
+                to bring premium fashion for men and women worldwide.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+            <h3 style="color:#ff9800; margin-bottom:15px; font-size:18px;">Quick Links</h3>
+            <ul style="list-style:none; padding:0; font-size:14px; line-height:2;">
+                <li><a href="index.html" style="color:#ccc; text-decoration:none;">Home</a></li>
+                <li><a href="#history" style="color:#ccc; text-decoration:none;">Our History</a></li>
+                <li><a href="#features" style="color:#ccc; text-decoration:none;">App Features</a></li>
+                <li><a href="#testimonials" style="color:#ccc; text-decoration:none;">Stories</a></li>
+                <li><a href="#subscribe" style="color:#ccc; text-decoration:none;">Subscribe</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+            <h3 style="color:#ff9800; margin-bottom:15px; font-size:18px;">Contact Us</h3>
+            <p style="font-size:14px; margin:8px 0;"><i class="fas fa-phone"></i> 08056102470</p>
+            <p style="font-size:14px; margin:8px 0;"><i class="fas fa-envelope"></i> maxrichie65@gmail.com</p>
+            <p style="font-size:14px; margin:8px 0;"><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
+        </div>
+
+        <!-- Subscribe Box -->
+        <div>
+            <h3 style="color:#ff9800; margin-bottom:15px; font-size:18px;">Join Our Newsletter</h3>
+            <p style="font-size:14px; color:#ccc; margin-bottom:12px;">
+                Be the first to get updates on new arrivals, style tips & exclusive offers.
+            </p>
+            <form id="footer-subscribe-form" name="subscribe" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="subscribe">
+    <input type="email" name="maxrichie65@gmail.com" placeholder="Enter your email" required
+           style="flex:1; padding:10px; border:none; border-radius:4px; font-size:14px;">
+    <button type="submit" 
+            style="background:#ff9800; color:white; border:none; padding:10px 15px; border-radius:4px; cursor:pointer; font-weight:600;">
+        Subscribe
+    </button>
+</form>
+<p id="subscribe-msg" style="font-size:12px; color:lightgreen; margin-top:8px; display:none;">✅ Thanks for subscribing!</p>
+        </div>
+
+    </div>
+
+    <hr style="margin:30px 0; border:0.5px solid rgba(255,255,255,0.2);">
+
+    <p style="text-align:center; font-size:13px; color:#ccc; margin:0;">
+        © 2025 Elegant Men. All rights reserved. | Designed with ❤️ for Elegance
+    </p>
+</footer>
+
+<!-- Script for fake subscribe confirmation -->
+<script>
+document.getElementById("footer-subscribe-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("subscribe-msg").style.display = "block";
+    this.reset();
+});
+</script>
+
+
+<script>
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+function subscribe() {
+    const email = document.getElementById('email').value;
+    const response = document.getElementById('responseMessage');
+    if (email && email.includes('@')) {
+        response.style.color = 'lightgreen';
+        response.innerText = `Thank you for subscribing ${email}!`;
+        document.getElementById('email').value = '';
+    } else {
+        response.style.color = 'red';
+        response.innerText = 'Please enter a valid email address.';
+    }
+}
+function toggleFaq(element) {
+    const p = element.nextElementSibling;
+    p.style.display = p.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

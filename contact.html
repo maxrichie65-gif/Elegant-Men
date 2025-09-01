@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elegant Men - Premium Fashion</title>
+<link rel="icon" href="https://via.placeholder.com/32x32.png?text=EM" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family:'Poppins', sans-serif; background:#f7f7f7; color:#333; scroll-behavior:smooth;}
+    header {background:#111; color:#fff; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000;}
+    header h1 {font-size:24px; font-weight:600;}
+    nav {display:flex; gap:20px;}
+    nav a {color:#fff; text-decoration:none; font-size:16px; position:relative;}
+    nav a:hover {color:#f0c040;}
+    .menu-toggle {display:none; font-size:26px; cursor:pointer;}
+    @media(max-width:768px){
+        nav {display:none; flex-direction:column; background:#111; position:absolute; top:60px; right:0; width:200px; padding:10px;}
+        nav a {padding:10px;}
+        nav.show {display:flex;}
+        .menu-toggle {display:block;}
+    }
+    /* Hero Slider */
+    .hero-slider {position:relative; height:80vh; overflow:hidden;}
+    .slide {position:absolute; width:100%; height:100%; background-size:cover; background-position:center; opacity:0; transition:opacity 1s;}
+    .slide.active {opacity:1;}
+    .overlay {position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);}
+    .hero-text {position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center; color:#fff;}
+    .hero-text h2 {font-size:48px; margin-bottom:10px;}
+    .hero-text p {font-size:18px; margin-bottom:20px;}
+    .hero-text a {background:#f0c040; color:#111; padding:12px 20px; border-radius:4px; text-decoration:none; font-weight:600;}
+    .hero-text a:hover {background:#fff; color:#111;}
+    /* Search bar (kept) */
+    .search-bar {display:flex; justify-content:center; margin:20px;}
+    .search-bar input {width:60%; padding:12px; border:1px solid #ccc; border-radius:4px;}
+
+    /* Contact Page (replaces items) */
+    .contact-wrap {padding:30px 20px; max-width:1100px; margin:0 auto;}
+    .contact-grid {display:grid; grid-template-columns: 1.2fr 0.8fr; gap:30px;}
+    .card {background:#fff; border-radius:10px; box-shadow:0 2px 12px rgba(0,0,0,0.08); padding:20px;}
+    .card h3 {margin-bottom:12px;}
+    .contact-form label {display:block; font-weight:600; margin:12px 0 6px;}
+    .contact-form input, .contact-form textarea, .contact-form select {
+        width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-family:'Poppins', sans-serif;
+    }
+    .contact-form textarea {min-height:140px; resize:vertical;}
+    .btn-primary {background:#111; color:#fff; border:none; padding:12px 16px; border-radius:8px; cursor:pointer; font-weight:600;}
+    .btn-primary:hover {background:#f0c040; color:#111;}
+    .info-row {display:flex; gap:12px; align-items:flex-start; margin:10px 0;}
+    .info-row i {color:#111; background:#f0c040; padding:10px; border-radius:8px;}
+    .muted {color:#666; font-size:14px;}
+    .success-msg {display:none; margin-top:12px; color:#1e7e34; font-weight:600;}
+    .error-msg {display:none; margin-top:12px; color:#b00020; font-weight:600;}
+
+    .map-wrap {margin-top:20px;}
+    .map-wrap iframe {width:100%; height:320px; border:0; border-radius:10px; box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+
+    /* About with Slider (kept) */
+    .about {background:#fff; padding:40px 20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:30px; margin-top:20px;}
+    .about-slider {position:relative; width:400px; max-width:100%; height:280px; overflow:hidden; border-radius:8px;}
+    .about-slide {position:absolute; width:100%; height:100%; background-size:cover; background-position:center; opacity:0; transition:opacity 1s;}
+    .about-slide.active {opacity:1;}
+    .about-text {max-width:500px;}
+    .about-text h2 {font-size:28px; margin-bottom:15px;}
+    .about-text p {font-size:16px; line-height:1.5;}
+
+    /* Footer (upgraded) */
+    footer {background:#111; color:#fff; padding:40px 20px 20px; margin-top:40px;}
+    .footer-grid {max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:30px;}
+    .footer-col h4 {color:#f0c040; margin-bottom:12px; font-size:18px;}
+    .footer-col ul {list-style:none;}
+    .footer-col ul li {margin:8px 0;}
+    .footer-col a {color:#ddd; text-decoration:none;}
+    .footer-col a:hover {color:#f0c040;}
+    .socials {display:flex; gap:12px; margin-top:10px;}
+    .socials a {color:#fff; font-size:20px;}
+    .socials a:hover {color:#f0c040;}
+    .quick-search {display:flex; gap:8px; margin-top:10px;}
+    .quick-search input {flex:1; padding:10px; border:none; border-radius:6px;}
+    .quick-search button {padding:10px 12px; border:none; border-radius:6px; background:#f0c040; color:#111; font-weight:600; cursor:pointer;}
+    .fav-actions {display:flex; gap:8px; margin-top:10px;}
+    .fav-actions button {padding:8px 10px; border:none; border-radius:6px; background:#222; color:#fff; cursor:pointer;}
+    .fav-actions button:hover {background:#333;}
+    .fav-list {margin-top:10px;}
+    .fav-item {display:flex; align-items:center; justify-content:space-between; background:#1b1b1b; padding:8px 10px; border-radius:6px; color:#ddd; margin:6px 0;}
+    .fav-item a {color:#ddd; text-decoration:none;}
+    .fav-item a:hover {color:#f0c040;}
+    .fav-item button {background:transparent; border:none; color:#f66; cursor:pointer;}
+    .foot-bottom {text-align:center; color:#bbb; margin-top:20px; font-size:13px;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Elegant Men</h1>
+    <span class="menu-toggle" onclick="toggleMenu()">&#9776;</span>
+    <nav id="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="#hero">Hero</a>
+        <a href="index.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="#products">Contact</a>
+        <a href="login.html">History</a>
+    </nav>
+</header>
+
+<!-- Hero Slider (kept) -->
+<section class="hero-slider" id="hero">
+    <div class="slide active" style="background-image:url('img/slider 4.png');">
+        <div class="overlay"></div>
+        <div class="hero-text">
+            <h2>Elevate Your Style</h2>
+            <p>Premium Men's Fashion</p>
+            <a href="#products">Shop Now</a>
+        </div>
+    </div>
+    <div class="slide" style="background-image:url('img/slider 3.png');">
+        <div class="overlay"></div>
+        <div class="hero-text">
+            <h2>Formal Elegance</h2>
+            <p>Suits for Every Occasion</p>
+            <a href="#products">Shop Now</a>
+        </div>
+    </div>
+    <div class="slide" style="background-image:url('img/th.webp');">
+        <div class="overlay"></div>
+        <div class="hero-text">
+            <h2>Footwear that Defines You</h2>
+            <p>Step Up Your Game</p>
+            <a href="#products">Shop Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION (uses id="products" to keep your existing links working) -->
+<section class="contact-wrap" id="products">
+    <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="card">
+            <h3>Contact Us</h3>
+            <p class="muted">Have a question or need assistance? Send us a message and we’ll get back to you.</p>
+            <form class="contact-form" id="contactForm">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Your Name">
+
+                <label for="emailC">Email</label>
+                <input type="email" id="emailC" name="email" placeholder="you@example.com">
+
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                    <option value="">Select a subject</option>
+                    <option>Order Inquiry</option>
+                    <option>Product Question</option>
+                    <option>Partnership</option>
+                    <option>Other</option>
+                </select>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Write your message..."></textarea>
+
+                <button type="submit" class="btn-primary" style="margin-top:12px;"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+                <div class="success-msg" id="formSuccess">✅ Your message has been sent. We’ll reply shortly.</div>
+                <div class="error-msg" id="formError">⚠️ Please fill all fields correctly.</div>
+            </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="card">
+            <h3>Our Office</h3>
+            <div class="info-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <strong>Address</strong>
+                    <div class="muted">Lagos, Nigeria</div>
+                </div>
+            </div>
+            <div class="info-row">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <strong>Phone</strong>
+                    <div class="muted">08056102470</div>
+                </div>
+            </div>
+            <div class="info-row">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <strong>Email</strong>
+                    <div class="muted">maxrichie65@gmail.com</div>
+                </div>
+            </div>
+
+            <div class="map-wrap">
+                <!-- Google Map Embed (Lagos) -->
+                <iframe 
+                    src="https://www.google.com/maps?q=Lagos,%20Nigeria&z=12&output=embed" 
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About (kept) -->
+<section class="about" id="about">
+    <div class="about-slider">
+        <div class="about-slide active" style="background-image:url('img/download.webp');"></div>
+        <div class="about-slide" style="background-image:url('img/nmn.jpg');"></div>
+        <div class="about-slide" style="background-image:url('img/cap.png');"></div>
+        <div class="about-slide" style="background-image:url('img/fd.jpg');"></div>
+    </div>
+    <div class="about-text">
+        <h2>About Elegant Men</h2>
+        <p>Elegant Men is your destination for premium Men, Women’s fashion. We specialize in delivering stylish, comfortable, and affordable clothing that helps you look your best every day. Our collections include shirts, suits, shoes, and more—all carefully selected for modern Gentlemen and Gentlewomen.</p>
+    </div>
+</section>
+
+<!-- FOOTER (with Links, Socials, Address, Quick Search, Favorites) -->
+<footer id="contact">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>Elegant Men</h4>
+            <p class="muted">Redefining style since 2022. Tradition meets modern luxury for men & women worldwide.</p>
+            <div class="info-row" style="margin-top:10px;">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>Lagos, Nigeria</div>
+            </div>
+            <div class="info-row">
+                <i class="fa-solid fa-phone"></i>
+                <div>08056102470</div>
+            </div>
+            <div class="info-row">
+                <i class="fa-solid fa-envelope"></i>
+                <div>maxrichie65@gmail.com</div>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Links</h4>
+            <ul>
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <li><a href="#products"><i class="fa-solid fa-headset"></i> Contact</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope-open"></i> Support</a></li>
+                <li><a href="login.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Search</h4>
+            <div class="quick-search">
+                <input type="text" id="footerSearch" placeholder="Type to filter links...">
+                <button id="footerSearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <ul id="footerSearchResults" style="list-style:none; margin-top:10px;"></ul>
+
+            <h4 style="margin-top:18px;">Follow Us</h4>
+            <div class="socials">
+                <a href="https://instagram.com/elegantmenfashion" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Favorites</h4>
+            <div class="fav-actions">
+                <button id="addFav"><i class="fa-regular fa-heart"></i> Add This Page</button>
+                <button id="clearFav"><i class="fa-solid fa-trash"></i> Clear</button>
+            </div>
+            <div class="fav-list" id="favList"></div>
+        </div>
+    </div>
+
+    <div class="foot-bottom">
+        © 2025 Elegant Men. All rights reserved.
+    </div>
+</footer>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+    let cart = [];
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    }
+
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }, 4000);
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        document.getElementById('cart-count').innerText = cart.length;
+        renderCart();
+    }
+
+    function renderCart() {
+        const cartItems = document.getElementById('cart-items');
+        cartItems.innerHTML = '';
+        let total = 0;
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.name + ' - $' + item.price;
+            cartItems.appendChild(li);
+            total += item.price;
+        });
+        document.getElementById('cart-total').innerText = total;
+    }
+
+    function openModal(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function toggleMenu() {
+        document.getElementById('nav-menu').classList.toggle('show');
+    }
+
+    function payWithPaystack() {
+        let handler = PaystackPop.setup({
+            key: 'pk_test_xxxxxxxxxxxxx', // Replace with your Paystack public key
+            email: 'customer@example.com',
+            amount: document.getElementById('cart-total').innerText * 100,
+            currency: 'USD',
+            callback: function(response){
+                alert('Payment successful! Reference: ' + response.reference);
+            },
+            onClose: function(){
+                alert('Payment window closed.');
+            }
+        });
+        handler.openIframe();
+    }
+
+    // --- Contact Form Validation (simple) ---
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('emailC').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const ok = name && email.includes('@') && subject && message.length > 5;
+
+        document.getElementById('formError').style.display = ok ? 'none' : 'block';
+        if(!ok) return;
+
+        // Demo success (replace with backend/Netlify if needed)
+        document.getElementById('formSuccess').style.display = 'block';
+        contactForm.reset();
+        setTimeout(()=>{ document.getElementById('formSuccess').style.display = 'none'; }, 4000);
+    });
+
+    // --- Footer Quick Search (filters footer Links list) ---
+    const footerSearch = document.getElementById('footerSearch');
+    const footerSearchBtn = document.getElementById('footerSearchBtn');
+    const linksData = [
+        { label:'Home', href:'#home' },
+        { label:'Contact', href:'#products' },
+        { label:'About', href:'about.html' },
+        { label:'Support', href:'contact.html' },
+        { label:'History', href:'login.html' }
+    ];
+    function renderSearchResults(q=''){
+        const ul = document.getElementById('footerSearchResults');
+        ul.innerHTML = '';
+        const results = linksData.filter(l => l.label.toLowerCase().includes(q.toLowerCase()));
+        results.forEach(r=>{
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${r.href}"><i class="fa-solid fa-arrow-right"></i> ${r.label}</a>`;
+            ul.appendChild(li);
+        });
+        if(results.length===0){
+            const li = document.createElement('li');
+            li.style.color = '#aaa';
+            li.textContent = 'No matches…';
+            ul.appendChild(li);
+        }
+    }
+    footerSearch.addEventListener('input', e=> renderSearchResults(e.target.value));
+    footerSearchBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        renderSearchResults(footerSearch.value);
+    });
+    renderSearchResults('');
+
+    // --- Favorites (store in localStorage) ---
+    const FAV_KEY = 'em_favorites';
+    const favListEl = document.getElementById('favList');
+    function getFavs(){ try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; } catch { return []; } }
+    function saveFavs(favs){ localStorage.setItem(FAV_KEY, JSON.stringify(favs)); }
+    function renderFavs(){
+        const favs = getFavs();
+        favListEl.innerHTML = '';
+        if(favs.length===0){
+            favListEl.innerHTML = '<div class="muted">No favorites yet.</div>';
+            return;
+        }
+        favs.forEach((f, idx)=>{
+            const row = document.createElement('div');
+            row.className = 'fav-item';
+            row.innerHTML = `<a href="${f.href}"><i class="fa-regular fa-bookmark"></i> ${f.label}</a>
+                             <button title="Remove" aria-label="Remove favorite" onclick="removeFav(${idx})"><i class="fa-solid fa-xmark"></i></button>`;
+            favListEl.appendChild(row);
+        });
+    }
+    function addCurrentPageFav(){
+        const favs = getFavs();
+        const label = document.title || 'Elegant Men';
+        const href = location.pathname + location.hash;
+        if(favs.some(f=> f.href===href)) { alert('Already in favorites'); return; }
+        favs.push({label, href});
+        saveFavs(favs); renderFavs();
+    }
+    function clearFavs(){ saveFavs([]); renderFavs(); }
+    function removeFav(i){ const favs = getFavs(); favs.splice(i,1); saveFavs(favs); renderFavs(); }
+
+    document.getElementById('addFav').addEventListener('click', addCurrentPageFav);
+    document.getElementById('clearFav').addEventListener('click', clearFavs);
+    window.removeFav = removeFav; // expose for inline onclick
+    renderFavs();
+
+    // About slider (kept)
+    const aboutSlides = document.querySelectorAll('.about-slide');
+    let aboutIndex = 0;
+    setInterval(() => {
+        aboutSlides.forEach((slide, i) => slide.classList.toggle('active', i === aboutIndex));
+        aboutIndex = (aboutIndex + 1) % aboutSlides.length;
+    }, 4000);
+
+    // Keep original product search input from header (won't do anything here)
+    document.getElementById('search').addEventListener('input', function() {
+        // No products on contact page; could hook to footer quick search instead:
+        footerSearch.value = this.value;
+        renderSearchResults(this.value);
+    });
+
+    // Tabs
+    function switchTab(event, tab) {
+        document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        document.getElementById(tab).classList.add('active');
+    }
+    window.switchTab = switchTab;
+
+    // Register
+    function registerUser() {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        if(name && email && password){
+            localStorage.setItem(email, JSON.stringify({name, email, password}));
+            alert('Registration successful!');
+            switchTab({target: document.querySelector('.tabs button:first-child')}, 'login');
+        } else {
+            alert('Please fill all fields');
+        }
+    }
+    window.registerUser = registerUser;
+
+    // Login
+    function loginUser() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const user = JSON.parse(localStorage.getItem(email));
+        if(user && user.password === password){
+            alert('Login successful!');
+            document.getElementById('login-link').textContent = 'Welcome, ' + user.name.split(' ')[0];
+            closeModal('loginModal');
+        } else {
+            alert('Invalid credentials');
+        }
+    }
+    window.loginUser = loginUser;
+</script>
+</body>
+</html>

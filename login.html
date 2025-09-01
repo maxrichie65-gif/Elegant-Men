@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elegant Men Newsletter</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+    nav {
+        background-color: #1a1a1a;
+        color: #fff;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    nav .logo {
+        font-weight: 700;
+        font-size: 24px;
+    }
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+    nav ul li, nav ul a {
+        cursor: pointer;
+        transition: color 0.3s;
+        text-decoration: none;
+        color: white;
+    }
+    nav ul li:hover, nav ul a:hover {
+        color: #ff9800;
+    }
+    section {
+        padding: 60px 30px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    p {
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+    .subscribe-section {
+        background-color: #1a1a1a;
+        color: #fff;
+        padding: 50px 30px;
+        text-align: center;
+        border-radius: 10px;
+        margin: 40px 0;
+    }
+    .subscribe-section input[type="email"] {
+        padding: 10px;
+        width: 250px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .subscribe-section button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ff9800;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    .subscribe-section button:hover {
+        background-color: #e68a00;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+
+    /* Assistant Styles */
+    .assistant-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #ff9800;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 2000;
+    }
+    .assistant-chat {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 300px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 2000;
+    }
+    .assistant-header {
+        background: #1a1a1a;
+        color: #fff;
+        padding: 10px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .assistant-body {
+        padding: 15px;
+        height: 200px;
+        overflow-y: auto;
+        font-size: 14px;
+    }
+    .assistant-body p {
+        margin: 8px 0;
+    }
+    .assistant-footer {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+    .assistant-footer input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+    }
+    .assistant-footer button {
+        background: #ff9800;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Elegant Men</div>
+    <ul>
+         <a href="index.html">Home</a>
+            <li onclick="scrollToSection('hero')">Hero</li>
+        <li onclick="scrollToSection('history')">History</li>
+        <li onclick="scrollToSection('features')">Features</li>
+        <li onclick="scrollToSection('stories')">Stories</li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section id="hero">
+    <h1>Welcome to Elegant Men</h1>
+    <p><b>A Trusted Online Store for Premium Men's and Women's Fashion, History, and Exclusive App Features. Explore our World of Elegance.</b></p>
+</section>
+
+<!-- History Section -->
+<section id="history">
+    <h2>Our History</h2>
+    <p><b>Elegant Men started as online business in 2022, Dedicated to Providing Sophisticated Fashion for Men and Women Worldwide. Over the years, We Expanded into Online Retail and Mobile Apps, Making Style Accessible to Everyone.</b></p>
+    <p><b>From Footwears to Contemporary Casual Wear, Our Collections Represent Decades of Craftsmanship and Attention to Detail. Every Wears tells a Story of Elegance, Tradition, and Modernity.</b></p>
+</section>
+
+<!-- Features Section -->
+<section id="features">
+    <h2>App & Store Features</h2>
+    <p><b>Our Elegant Men app provides a Seamless Shopping Experience:</b></p>
+    <ul>
+        <li><b>Browse and purchase premium fashion items easily.</b></li>
+        <li><b>Exclusive collections and early access to new releases.</b></li>
+        <li><b>Track your orders and get notifications on deals.</b></li>
+        <li><b>Wishlist your favorite products and receive curated suggestions.</b></li>
+        <li><b>Secure and fast payment integration.</b></li>
+    </ul>
+</section>
+
+<!-- Stories Section -->
+<section id="stories">
+    <h2>Stories About Elegant Men</h2>
+    <p><b>Customers and Fashion Enthusiasts share their experiences with Elegant Men:</b></p>
+    <p><b>"Elegant Men is one of the Trusted Online Store I Put my Faith In." – Daniel Mathew.</b></p>
+    <p><b>"The App makes Shopping so easy. I always know when my Favorite Items are Back in Stock!" – Samuel Arinze.</b></p>
+</section>
+
+<!-- Footer -->
+<footer style="background:#1a1a1a; color:#fff; padding:50px 30px 20px; font-family:'Poppins', sans-serif; margin-top:40px;">
+    <div style="max-width:1150px; margin:auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:30px; text-align:left;">
+        
+        <!-- Brand -->
+        <div>
+            <h2 style="color:#ff9800; margin-bottom:15px;">Elegant Men</h2>
+            <p style="font-size:14px; line-height:1.7; color:#ccc;">
+                Redefining style since 2022. We blend tradition and modern trends 
+                to bring premium fashion for men and women worldwide.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+            <h3 style="color:#ff9800; margin-bottom:15px; font-size:18px;">Quick Links</h3>
+            <ul style="list-style:none; padding:0; font-size:14px; line-height:2;">
+                <li><a href="index.html" style="color:#ccc; text-decoration:none;">Home</a></li>
+                <li><a href="#history" style="color:#ccc; text-decoration:none;">Our History</a></li>
+                <li><a href="#features" style="color:#ccc; text-decoration:none;">App Features</a></li>
+                <li><a href="#testimonials" style="color:#ccc; text-decoration:none;">Stories</a></li>
+                <li><a href="#subscribe" style="color:#ccc; text-decoration:none;">Subscribe</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+            <h3 style="color:#ff9800; margin-bottom:15px; font-size:18px;">Contact Us</h3>
+            <p style="font-size:14px; margin:8px 0;"><i class="fas fa-phone"></i> 08056102470</p>
+            <p style="font-size:14px; margin:8px 0;"><i class="fas fa-envelope"></i> maxrichie65@gmail.com</p>
+            <p style="font-size:14px; margin:8px 0;"><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
+        </div>
+
+        <!-- Subscribe Box -->
+        <div>
+            <h3 style="color:#ff9800; margin-bottom:15px; font-size:18px;">Join Our Newsletter</h3>
+            <p style="font-size:14px; color:#ccc; margin-bottom:12px;">
+                Be the first to get updates on new arrivals, style tips & exclusive offers.
+            </p>
+            <form id="footer-subscribe-form" style="display:flex; gap:8px;">
+                <input type="email" placeholder="Enter your email" required 
+                       style="flex:1; padding:10px; border:none; border-radius:4px; font-size:14px;">
+                <button type="submit" 
+                        style="background:#ff9800; color:white; border:none; padding:10px 15px; border-radius:4px; cursor:pointer; font-weight:600;">
+                    Subscribe
+                </button>
+            </form>
+            <p id="subscribe-msg" style="font-size:12px; color:lightgreen; margin-top:8px; display:none;">✅ Thanks for subscribing!</p>
+        </div>
+
+    </div>
+
+    <hr style="margin:30px 0; border:0.5px solid rgba(255,255,255,0.2);">
+
+    <p style="text-align:center; font-size:13px; color:#ccc; margin:0;">
+        © 2025 Elegant Men. All rights reserved. | Designed with ❤️ for Elegance
+    </p>
+</footer>
+
+<!-- Script for fake subscribe confirmation -->
+<script>
+document.getElementById("footer-subscribe-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("subscribe-msg").style.display = "block";
+    this.reset();
+});
+</script>
+
+
+<!-- Assistant Widget -->
+<button class="assistant-btn" onclick="toggleAssistant()">💬</button>
+<div class="assistant-chat" id="assistantChat">
+    <div class="assistant-header">👔 Elegant Men Assistant</div>
+    <div class="assistant-body" id="assistantBody">
+        <p>Hello! You can <b>type</b> or <b>speak</b> to me 🎤</p>
+        <p><b>Ask about: History, Features, Stories, or Subscribe.</b></p>
+    </div>
+    <div class="assistant-footer">
+        <input type="text" id="assistantInput" placeholder="Type a question...">
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="startListening()">🎤</button>
+    </div>
+</div>
+
+<script>
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Subscription function
+function subscribe() {
+    const email = document.getElementById('email').value;
+    const response = document.getElementById('responseMessage');
+    if (email && email.includes('@')) {
+        response.style.color = 'lightgreen';
+        response.innerText = `Thank you for subscribingwith our channel ${email}!`;
+        document.getElementById('email').value = '';
+    } else {
+        response.style.color = 'red';
+        response.innerText = 'Please enter a valid email address.';
+    }
+}
+
+// Assistant toggle
+function toggleAssistant() {
+    const chat = document.getElementById('assistantChat');
+    chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+}
+
+// Handle user messages
+function handleAssistant(msg) {
+    const body = document.getElementById('assistantBody');
+    body.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+    let reply = "";
+    
+    if(msg.toLowerCase().includes("history")) {
+        reply = "Elegant Men started as a boutique in 2022, now is a global fashion brand for men & women.";
+    } else if (msg.toLowerCase().includes("features")) {
+        reply = "Our app lets you browse collections, wishlist items, track orders, and shop securely.";
+    } else if (msg.toLowerCase().includes("stories")) {
+        reply = "Customers love our suits, app convenience, and premium service!";
+    } else if (msg.toLowerCase().includes("subscribe")) {
+        reply = "You can subscribe below in the Subscribe section.";
+        setTimeout(()=>scrollToSection('subscribe'),1500);
+    } else {
+        reply = "Hello! I can tell You about our History, Stories and on how to subscribe .";
+    }
+
+    body.innerHTML += `<p><b>Assistant:</b> ${reply}</p>`;
+    body.scrollTop = body.scrollHeight;
+    speak(reply); // Voice reply
+}
+
+function sendMessage() {
+    const input = document.getElementById('assistantInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    handleAssistant(msg);
+    input.value = "";
+}
+
+// Speech synthesis (Assistant talks)
+function speak(text) {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    window.speechSynthesis.speak(speech);
+}
+
+// Speech recognition (User talks)
+function startListening() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert("Sorry, your browser does not support Speech Recognition.");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        handleAssistant(transcript);
+    };
+}
+</script>
+
+</body>
+</html>
