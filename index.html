@@ -96,6 +96,32 @@
       display: flex;
       flex-direction: column;
     }
+
+    /* Hide menu by default on mobile */
+#nav-menu {
+  display: none;
+  flex-direction: column; /* vertical menu */
+  position: absolute;
+  top: 60px; /* adjust to your navbar height */
+  right: 0;
+  background: #fff;
+  width: 200px;
+  z-index: 1000;
+  padding: 10px;
+}
+
+/* Show menu when active */
+#nav-menu.active {
+  display: flex;
+}
+
+/* Style links */
+#nav-menu a {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
     .cart-drawer.active { right: 0; }
     .cart-header { padding: 15px; background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center; }
     .cart-header h2 { margin: 0; font-size: 18px; }
@@ -546,6 +572,12 @@
   if (loggedUser) {
     document.write(`<p>Welcome, <b>${loggedUser.username}</b> (${loggedUser.email})</p>`);
   }
+
+  function toggleMenu() {
+    const nav = document.getElementById('nav-menu');
+    nav.classList.toggle('active');
+  }
+
 </script>
 </body>
 </html>

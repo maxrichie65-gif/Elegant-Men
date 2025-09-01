@@ -43,6 +43,30 @@
     nav ul li:hover, nav ul a:hover {
         color: #ff9800;
     }
+/* Hide menu by default on mobile */
+#nav-menu {
+  display: none;
+  flex-direction: column; /* vertical menu */
+  position: absolute;
+  top: 60px; /* adjust to your navbar height */
+  right: 0;
+  background: #fff;
+  width: 200px;
+  z-index: 1000;
+  padding: 10px;
+}
+
+/* Show menu when active */
+#nav-menu.active {
+  display: flex;
+}
+
+/* Style links */
+#nav-menu a {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
 
     /* ✅ Improved Hero Slider */
     .hero {
@@ -389,6 +413,12 @@ function toggleFaq(element) {
     const p = element.nextElementSibling;
     p.style.display = p.style.display === "block" ? "none" : "block";
 }
+
+  function toggleMenu() {
+    const nav = document.getElementById('nav-menu');
+    nav.classList.toggle('active');
+  }
+
 </script>
 
 </body>
